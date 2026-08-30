@@ -1,0 +1,30 @@
+name: CI - CD
+on: push
+jobs:
+    test:
+        name: Run the test suite
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Code
+              uses: actions/checkout@v3
+            - name: Install NodeJS
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - name: Install dependencies
+              run: npm ci
+            - name: Run tests
+              run: npm test
+    deploy:
+        name: Mock a deployment WF
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Code
+              uses: actions/checkout@v3
+            - name: Install Deps
+              run: npm ci
+            - name: Build Project
+              run: npm run build
+            - name: Deploy
+              run: echo "Deploying project..."
