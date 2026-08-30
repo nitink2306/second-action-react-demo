@@ -1,5 +1,5 @@
 name: CI - CD
-on: push
+on: [push, workflow_dispatch]
 jobs:
     test:
         name: Run the test suite
